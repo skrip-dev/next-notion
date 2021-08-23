@@ -7,7 +7,7 @@ import { NotionAPI } from 'notion-client';
 import { firebaseAdmin } from '~/config/firebaseAdmin';
 
 interface PageProps {
-  recordMap: any;
+  recordMap?: any;
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
@@ -16,14 +16,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   const pageOptionsDoc = await firebaseAdmin
     .firestore()
     .collection('siteConfig')
-    .doc('home')
+    .doc('404')
     .get();
 
   const pageOptions = pageOptionsDoc.data();
 
   if (!pageOptions) {
     return {
-      notFound: true,
+      props: {},
       revalidate: 10,
     };
   }
@@ -39,6 +39,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 };
 
 const PageComponent: NextPage<PageProps> = ({ recordMap }) => {
+  if (!recordMap) {
+    return <h1>404</h1>;
+  }
+
   return <NotionRenderer recordMap={recordMap} fullPage darkMode />;
 };
 

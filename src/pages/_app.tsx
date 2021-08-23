@@ -3,7 +3,7 @@ import React from 'react';
 import '~/config/firebaseClient';
 
 import 'react-notion-x/src/styles.css';
-import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/themes/prism-coy.css';
 import 'rc-dropdown/assets/index.css';
 import 'katex/dist/katex.min.css';
 
